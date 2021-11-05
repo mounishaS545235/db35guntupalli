@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1= title
+  br
+  - var results = [{flavour: "vanilla",Cost: 7.8,quantity: 2},{flavour: "strawberry",Cost: 10.0,quantity: 1},{flavour: "chocolate",Cost: 8.9,quantity: 3}];
+   div(class = "container-fluid")
+    div(class = "row")
+     each i,index in results
+        div(class="col-sm-4" onclick=`buy(${index})`) flavour: #{i.flavour} 
+        br
+        br 
+        div(class="col-sm-4" onclick=`buy(${index})`) Cost: #{i.Cost}
+        br
+        br  
+        div(class="col-sm-4" onclick=`buy(${index})`) quantity #{i.quantity}
+        script.
+                function buy(itemNo){
+                    alert(`You purchased item ${itemNo+1}`)
+                }
