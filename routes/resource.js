@@ -18,4 +18,6 @@ icecream_controller.icecream_update_put);
 router.get('/resource/icecream/:id', icecream_controller.icecream_detail);
 // GET request for list of all icecream items.
 router.get('/resource/icecream', icecream_controller.icecream_list);
+// GET request for one icecream.
+router.get('/icecream/:id', icecream_controller.icecream_detail);
 module.exports = router;
