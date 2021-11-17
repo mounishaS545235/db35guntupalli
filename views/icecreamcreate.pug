@@ -15,6 +15,8 @@ block content
         input#cost(type='number', name='cost')
     input(type="submit")
 
+    button(class="btn btn-secondary m-2" onclick="window.location.href='/icecream'") Cancel 
+
  script.
     document.forms['icecreamForm'].addEventListener('submit', (event) => {
         event.preventDefault();
