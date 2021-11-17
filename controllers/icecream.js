@@ -114,3 +114,16 @@ exports.icecream_create_Page = function (req, res) {
         res.send(`{'error': '${err}'}`);
     }
 };
+// Handle building the view for updating a icecream.
+// query provides the id
+exports.icecream_update_Page = async function (req, res) {
+    console.log("update view for item " + req.query.id)
+    try {
+        let result = await icecream.findById(req.query.id)
+        res.render('icecreamupdate', { title: 'Icecream Update', toShow: result });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
