@@ -2,27 +2,30 @@ extends layout
  
 block content 
   h1= title 
- 
-  - let icecreamid = toShow._id 
-  - let icecream_flavour = toShow.flavour
-  - let icecreamquantity = toShow.quantity
-  - let icecreamcost = toShow.Cost 
+
+  if (toShow == null) 
+    h2 No instance to Update     
+  else
+    - let icecreamid = toShow._id 
+    - let icecream_flavour = toShow.flavour
+    - let icecreamquantity = toShow.quantity
+    - let icecreamcost = toShow.Cost 
    
   div.row(class='mb-2') 
     div.mr-1 ID is 
     div #{icecreamid} 
   - let actionid = "/resource/icecream/" + icecreamid 
-  form(id='icecreamForm', action= actionid, method="PUT") 
-    div.form-group 
+  form(id='icecreamForm', action= actionid, method="PUT")
+    div.form-group
         label.icecreamAttr(for='flavour') Icecream Flavour
-        input#flavour(type='text', name='flavour', value= icecream_flavour ) 
-    div.form-group 
-        label.icecreamAttr(for='quantity') Icecream quantity  
-        input#quantity(type='number', name='quantity', value= icecreamquantity ) 
-    div.form-group 
-        label.icecreamAttr(for='Cost') Icecream Cost 
-        input#Cost(type='number', name='Cost', value= icecreamcost ) 
-    input(type="submit") 
+        input#flavour(type='text', name='flavour', value= icecream_flavour )
+    div.form-group
+        label.icecreamAttr(for='quantity') Icecream quantity
+        input#quantity(type='number', name='quantity', value= icecreamquantity )
+    div.form-group
+        label.icecreamAttr(for='Cost') Icecream Cost
+        input#Cost(type='number', name='Cost', value= icecreamcost )
+    input(type="submit")
 
     button(class="btn btn-secondary m-2" onclick="window.location.href='/icecream'") Cancel 
  
@@ -30,10 +33,10 @@ block content
     document.forms['icecreamForm'].addEventListener('submit', (event) => { 
       event.preventDefault(); 
       // TODO do something here to show user that form is being submitted 
-      fetch(event.target.action, { 
+    fetch(event.target.action, { 
         method: 'PUT', 
         body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
-      }).then((resp) => { 
+    }).then((resp) => { 
         return resp.json(); // or resp.text() or whatever the server sends 
       }).then((body) => { 
         alert("Update succeded") 

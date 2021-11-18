@@ -3,43 +3,49 @@ extends layout
 block content
   h1= title
 
-  - let icecreamid = toShow._id
-  - let icecream_flavour = toShow.flavour
-  - let icecreamquantity = toShow.quantity
-  - let icecreamcost = toShow.Cost
-
-  div.row(class='mb-2')
-    div.mr-1 ID is
-    div #{icecreamid}
-  - let actionid = "/resource/icecream/" + icecreamid
-  form(id='icecreamForm', action= actionid, method="PUT")
-    div.form-group
-        label.icecreamAttr(for='flavour') Icecream Flavour
-        input#flavour(type='text', name='flavour', value= icecream_flavour )
-    div.form-group
-        label.icecreamAttr(for='quantity') Icecream quantity
-        input#quantity(type='number', name='quantity', value= icecreamquantity )
-    div.form-group
-        label.icecreamAttr(for='Cost') Icecream Cost
-        input#Cost(type='number', name='Cost', value= icecreamcost )
-    input(type="submit")
-
+  if (toShow == null) 
+    h2 No instance to delete 
+  else 
+    - let icecreamid = toShow._id
+    - let icecream_flavour = toShow.flavour
+    - let icecreamquantity = toShow.quantity
+    - let icecreamcost = toShow.Cost
+    - let actionid = "/resource/icecream/" + icecreamid
+    script let actionid = "#{actionid}" 
+    div 
+      div.row 
+        div(class='icecreamAttr mr-3') Icecream ID is: 
+        div #{icecreamid}  
+        div(class='icecreamAttr mr-3') Icecream Flavour is: 
+        div #{icecream_flavour}
+        div(class='icecreamAttr mr-3') Icecream quantity is:  
+        div #{icecreamquantity} 
+        div(class='icecreamAttr mr-3') Icecream Cost is:  
+        div #{icecreamcost}
+        
+ 
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
     button(class="btn btn-secondary m-2" onclick="window.location.href='/icecream'") Cancel 
-
-  script.
-    document.forms['icecreamForm'].addEventListener('submit', (event) => {
-      event.preventDefault();
-      // TODO do something here to show user that form is being submitted
-      fetch(event.target.action, {
-        method: 'PUT',
-        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-      }).then((resp) => {
-        return resp.json(); // or resp.text() or whatever the server sends
-      }).then((body) => {
-        alert("Delete succeded")
-        // TODO handle body
-      }).catch((error) => {
-        // TODO handle error
-        alert("Delete failed " + error )
-      });
-    });
+ 
+  script. 
+    function cancel() { 
+      // Go back to the home page for the icecream collection 
+      window.location.href='/icecream' 
+    } 
+  script. 
+    function deleteOnid() { 
+      console.log("starting delete") 
+      // delete first 
+      fetch(actionid, { 
+        method: 'DELETE'   
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Delete succeded") 
+        window.location.href='/icecream' 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Delete failed " + error ) 
+      }); 
+    } 
