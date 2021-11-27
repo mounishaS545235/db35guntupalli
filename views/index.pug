@@ -1,20 +1,33 @@
-extends layout
+//- extends layout
 
-block content
-  h1= title
-  p Welcome to new page called #{title}
-  button(type="button", class="btn btn-success", onclick="update()") Press Me
-  <br>
-  <br>
+//- block content
+//-   h1= title
+//-   p Welcome to new page called #{title}
+//-   button(type="button", class="btn btn-success", onclick="update()") Press Me
+//-   <br>
+//-   <br>
   
-  div(id = "target") Display
+//-   div(id = "target") Display
 
-  script.
-      out = document.getElementById("target");
-      var client_count = 0;
-      function update(){
-        client_count = client_count + 1;
-        out.innerHTML = "Value now " + client_count;
-      }
+//-   script.
+//-       out = document.getElementById("target");
+//-       var client_count = 0;
+//-       function update(){
+//-         client_count = client_count + 1;
+//-         out.innerHTML = "Value now " + client_count;
+//-       }
 
-  a(href='icecream') Ice cream
+//-   a(href='icecream') Ice cream
+
+extends layout 
+ 
+block content 
+  if (!user) 
+    a(href="/login") Login 
+    br 
+    a(href="/register") Register 
+  if (user) 
+    p You are currently logged in as #{user.username} 
+    a(href="/icecream") Take me to icecream 
+    br 
+    a(href="/logout") Logout 
