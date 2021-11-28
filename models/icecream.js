@@ -1,8 +1,7 @@
 const mongoose = require("mongoose")
 const icecreamSchema = mongoose.Schema({
     flavour: String,
-    quantity: Number,
-    Cost: Number
-})
-module.exports = mongoose.model("Icecream",
-    icecreamSchema)
+    quantity: { type: Number, min: 1, max: 30, default: 0 },
+    Cost: { type: Number, min: 5, max: 70, default: 0 },
+});
+module.exports = mongoose.model("Icecream",icecreamSchema)
