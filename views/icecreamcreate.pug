@@ -5,14 +5,14 @@ block content
 
  form(id='icecreamForm', action="/resource/icecream", method="POST")
     div.form-group
-        label.icecreamAttr(for='icecream_type') Icecream Flavour
-        input#icecream_type(type='text', name='icecream_type')
+        label.icecreamAttr(for='flavour') Icecream Flavour
+        input#flavour(type='text', name='flavour')
     div.form-group
-        label.icecreamAttr(for='size') Icecream quantity
-        input#size(type='number', name='size')
+        label.icecreamAttr(for='quantity') Icecream quantity
+        input#quantity(type='number', name='quantity')
     div.form-group
-        label.icecreamAttr(for='cost') Icecream Cost
-        input#cost(type='number', name='cost')
+        label.icecreamAttr(for='Cost') Icecream Cost
+        input#Cost(type='number', name='Cost')
     input(type="submit")
 
     button(class="btn btn-secondary m-2" onclick="window.location.href='/icecream'") Cancel 
